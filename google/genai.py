@@ -4,7 +4,6 @@ import requests
 class _GenerateContentConfig:
     def __init__(self, temperature=0.2, **kwargs):
         self.temperature = temperature
-        self.kwargs = kwargs
 
 class types:
     GenerateContentConfig = _GenerateContentConfig
@@ -14,6 +13,7 @@ class _Response:
         self.text = text
 
 class _Models:
-    def __init__(self, api_key, base_url, default_model):
+    def __init__(self, api_key):
         self.api_key = os.getenv('DEEPSEEK_API_KEY') or api_key
-        self.base_url = (os.getenv('DEEP
+        self.base_url = (os.getenv('DEEPSEEK_BASE_URL') or 'https://api.deepseek.com').rstrip('/')
+       
