@@ -1,19 +1,13 @@
-import os
-import requests
+import os, requests
 
-class _GenerateContentConfig:
-    def __init__(self, temperature=0.2, **kwargs):
-        self.temperature = temperature
-
+class _Cfg:
+    def __init__(self, temperature=0.2, **kw): self.temperature=temperature
 class types:
-    GenerateContentConfig = _GenerateContentConfig
-
-class _Response:
-    def __init__(self, text):
-        self.text = text
-
+    GenerateContentConfig=_Cfg
+class _Resp:
+    def __init__(self, text): self.text=text
 class _Models:
-    def __init__(self, api_key):
-        self.api_key = os.getenv('DEEPSEEK_API_KEY') or api_key
-        self.base_url = (os.getenv('DEEPSEEK_BASE_URL') or 'https://api.deepseek.com').rstrip('/')
-       
+    def __init__(self, key):
+        self.key=os.getenv('DEEPSEEK_API_KEY') or key
+        self.url=(os.getenv('DEEPSEEK_BASE_URL') or 'https://api.deepseek.com').rstrip('/')+'/chat/completions'
+        self.model=os.getenv('DEEPSEEK_MODEL') or 'deep
