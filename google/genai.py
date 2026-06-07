@@ -1,9 +1,16 @@
-"""Minimalny adapter zgodnosci z google.genai dla DeepSeek API.
+import os
+import requests
 
-Pozwala pozostawic w aplikacji dotychczasowe wywolania:
-    client.models.generate_content(...)
-    genai.types.GenerateContentConfig(temperature=...)
+class types:
+    class GenerateContentConfig:
+        def __init__(self, temperature=0.2, **kwargs):
+            self.temperature = temperature
 
-Klucz API mozna podac jako argument Client(api_key=...) albo przez
-zmienna srodowiskowa DEEPSEEK_API_KEY. Jezeli w aplikacji zostanie
-placeholder "...", adapter sprobuje uzyc zmiennej srodowiskowej.
+class _Response:
+    def __init__(self, text):
+        self.text = text
+
+class Client:
+    def __init__(self, api_key=None):
+        key = api_key if api_key and api_key != "..." else os.getenv("DEEPSEEK_API_KEY")
+        if not key:
