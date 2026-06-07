@@ -1,17 +1,9 @@
-import os, requests
-
-class _Cfg:
-    def __init__(self, temperature=0.2, **kw):
-        self.temperature = temperature
-
+import os,requests as r
 class types:
-    GenerateContentConfig = _Cfg
-
-class _Resp:
-    def __init__(self, text):
-        self.text = text
-
-class _Models:
-    def __init__(self, key):
-        self.key = os.getenv('DEEPSEEK_API_KEY') or key
-        base = os.getenv('DEEPSEEK_BASE_URL') or 'https://api.deepseek
+ class GenerateContentConfig:
+  def __init__(s,temperature=.2):s.temperature=temperature
+class Client:
+ def __init__(s,api_key):s.models=s;s.k=os.getenv('DEEPSEEK_API_KEY')or api_key
+ def generate_content(s,model,contents,config=None):
+  x=r.post('https://api.deepseek.com/chat/completions',headers={'Authorization':'Bearer '+s.k},json={'model':'deepseek-chat','messages':[{'role':'user','content':contents}],'temperature':getattr(config,'temperature',.2)},timeout=180)
+  return
