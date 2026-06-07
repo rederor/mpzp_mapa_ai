@@ -1,7 +1,9 @@
-from .ds import q
-class types:
- class GenerateContentConfig:
-  def __init__(s,**k):pass
-class Client:
- def __init__(s,api_key):s.models=s;s.k=api_key
- def generate_content(s,model,contents,config=None):return type('R',(),{'text':q(s.k,contents)})()
+"""Minimalny adapter zgodnosci z google.genai dla DeepSeek API.
+
+Pozwala pozostawic w aplikacji dotychczasowe wywolania:
+    client.models.generate_content(...)
+    genai.types.GenerateContentConfig(temperature=...)
+
+Klucz API mozna podac jako argument Client(api_key=...) albo przez
+zmienna srodowiskowa DEEPSEEK_API_KEY. Jezeli w aplikacji zostanie
+placeholder "...", adapter sprobuje uzyc zmiennej srodowiskowej.
